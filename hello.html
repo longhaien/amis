@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>amis demo</title>
+
+  <link rel="stylesheet" href="sdk.css" />
+  <link rel="stylesheet" href="antd.css" />
+  <link rel="stylesheet" href="helper.css" />
+  <link rel="stylesheet" href="iconfont.css" />
+
+  <style>
+    html,
+    body,
+    .app-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root" class="app-wrapper"></div>
+  <script src="sdk.js"></script>
+  <script type="text/javascript">
+    (function () {
+      let amis = amisRequire('amis/embed');
+      // 通过替换下面这个配置来生成不同页面
+      let amisJSON = {
+        type: 'page',
+        name: 'page1',
+        title: '表单页面',
+        body: [{
+          type: 'form',
+          name: 'form1',
+          mode: 'horizontal',
+          api: '/saveForm',
+          body: [
+            {
+              label: 'Name',
+              name: 'name1',
+              type: 'input-text',
+              name: 'name'
+            },
+            {
+              label: 'Email',
+              type: 'input-email',
+              name: 'email'
+            }
+          ]
+        }, {
+          type: 'tpl',
+          tpl: '${myData}'
+        }]
+      };
+      let amisScoped = amis.embed('#root', amisJSON,
+        { // props amis 顶层数据域值
+          data: {
+            myData: 'data.myData',
+            locale: 'en-US'
+          }
+        },
+        {
+          theme: 'antd',
+          // fetcher: (url, method, data, config) => { },
+        });
+      // amisScoped.updateProps({ theme: 'antd' })
+
+      amisScoped.getComponentByName('page1.form1').setValues({ 'name1': 'othername' })
+      const page1Form1Values = amisScoped.getComponentByName('page1.form1').getValues();
+      console.log(page1Form1Values);
+
+      // amisScoped.unmount();
+    })();
+  </script>
+</body>
+
+</html>

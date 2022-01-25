@@ -1,0 +1,22 @@
+{
+  "name": "amis-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longhaien/amis.git"
+  },
+  "author": "longhaien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longhaien/amis/issues"
+  },
+  "homepage": "https://github.com/longhaien/amis#readme",
+  "dependencies": {
+    "amis": "^1.6.3"
+  }
+}
